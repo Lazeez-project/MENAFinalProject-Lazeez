@@ -1,0 +1,21 @@
+{
+  "name": "lazeez-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "mohamed-ubeid",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "express-fileupload": "^1.2.1",
+    "mssql": "^7.3.0",
+    "nodemon": "^2.0.15",
+    "validatorjs": "^3.22.1"
+  }
+}
