@@ -35,7 +35,7 @@ async function sendOrder(orderList) {
         .input('state', sql.Int, 0)
         .query("insert into orderlist (mealid, price, count, resid, userid, state) values (@mealid, @price, @count, @resid, @userid, @state)");
     return order.recordsets;
-}
+};
 
 async function getUser(userid) {
     let pool = await sql.connect(config);
@@ -43,22 +43,22 @@ async function getUser(userid) {
         .input('userid', sql.Int, userid)
         .query("SELECT id FROM orderusers WHERE ID = @userid");
     return user.recordsets;
-}
+};
 
 async function sendUser(user) {
     let pool = await sql.connect(config);
     let userInfo = await pool.request()
         .input('name', sql.VarChar, user.name)
-        .input('location', sql.VarChar, user.location? user.location : null)
+        .input('location', sql.VarChar, user.location ? user.location : null)
         .input('phonenumber', sql.VarChar, user.phonenumber)
-        .input('email', sql.VarChar, user.email? user.email : null)
+        .input('email', sql.VarChar, user.email ? user.email : null)
         .input('numberofseats', sql.Int, user.numberofseats ? user.numberofseats : null)
         .input('resid', sql.Int, user.resid)
         .input('ordertype', sql.VarChar, user.ordertype ? user.ordertype : null)
         .input('ordertime', sql.DateTime2, user.ordertime ? user.ordertime : null)
         .query("insert into orderusers (name, location, phonenumber, email, numberofseats, resid, ordertype, order_time) OUTPUT Inserted.ID values (@name, @location, @phonenumber, @email, @numberofseats, @resid, @ordertype, @ordertime)")
     return userInfo.recordsets;
-}
+};
 
 async function addMessages(messege) {
     let pool = await sql.connect(config);
@@ -70,8 +70,38 @@ async function addMessages(messege) {
         .input('isRead', sql.Int, 0)
         .query("insert into MASSEGES values (@fn, @ln, @email, @mass, @isRead) ");
     return msg.recordsets;
+};
+
+async function getUserOrder(name, phonenumber) {
+    let pool = await sql.connect(config);
+    if (name) {
+        let userOrder = await pool.request()
+            .input('name', sql.VarChar, name)
+            .input('phonenumber', sql.VarChar, phonenumber)
+            .query("select  orderlist.id ID, orderusers.name Name,orderusers.phonenumber PhoneNumber,orderusers.create_time OrderCreateTime, meals.mealname MealName, restaurant.name RestaurantName, orderusers.ordertype OrderType, orderusers.order_time OrderTime, orderusers.numberofseats NumberOfSeats, orderlist.price Price, orderlist.count Count, orderlist.state State from  (orderlist  join orderusers on (orderlist.userid = orderusers.id)) join restaurant on ( orderlist.resid = restaurant.id) join meals on (orderlist.mealid = meals.id) where  orderusers.name = @name and orderusers.phonenumber = @phonenumber");
+        return userOrder.recordsets;
+    }
+    let userOrder = await pool.request()
+        .input('phonenumber', sql.VarChar, phonenumber)
+        .query("select  orderlist.id ID, orderusers.name Name,orderusers.phonenumber PhoneNumber,orderusers.create_time OrderCreateTime, meals.mealname MealName, restaurant.name RestaurantName, orderusers.ordertype OrderType, orderusers.order_time OrderTime, orderusers.numberofseats NumberOfSeats, orderlist.price Price, orderlist.count Count, orderlist.state State from  (orderlist  join orderusers on (orderlist.userid = orderusers.id)) join restaurant on ( orderlist.resid = restaurant.id) join meals on (orderlist.mealid = meals.id) where   orderusers.phonenumber = @phonenumber");
+    return userOrder.recordsets;
 }
 
+async function deleteUserOrder(orderid) {
+    let pool = await sql.connect(config);
+    let deleteOrder = await pool.request()
+        .input('id', sql.Int, orderid)
+        .query("  DELETE FROM orderlist OUTPUT Deleted.ID WHERE id = @id and state = 0");
+    return deleteOrder.recordsets;
+}
+
+async function getRestaurantServices(resid) {
+    let pool = await sql.connect(config);
+    let services = await pool.request()
+        .input('resid', sql.Int, resid)
+        .query("  select id, checked from services where resid = @resid order by id");
+    return services.recordsets;
+};
 
 module.exports = {
     getRestaurants: getRestaurants,
@@ -80,5 +110,8 @@ module.exports = {
     getMeals: getMeals,
     sendOrder: sendOrder,
     sendUser: sendUser,
-    getUser: getUser
+    getUser: getUser,
+    getUserOrder: getUserOrder,
+    deleteUserOrder: deleteUserOrder,
+    getRestaurantServices: getRestaurantServices
 }

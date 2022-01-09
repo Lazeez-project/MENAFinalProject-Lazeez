@@ -2,6 +2,7 @@ const dboperations = require('../dboperations/end-user-operations');
 var express = require("express");
 var router = express.Router();
 const Validator = require('validatorjs');
+const { route } = require('express/lib/application');
 
 
 
@@ -35,13 +36,15 @@ router.route('/restaurants/:resid').get((req, res) => {
 router.route('/restaurants/:resid/meals').get((req, res) => {
     const resId = req.params.resid;
     dboperations.getMeals(resId).then(result => {
-        if (result[0].length !== 0) {
+        /*if (result[0].length !== 0) {
             res.json(result[0]);
         } else {
             res.status(404).json({
                 msg: "Not found!",
             });
-        }
+        }*/
+        res.json(result[0]);
+
     })
         .catch(err => {
             res.status(400).send(err.originalError.info.message);
@@ -136,6 +139,38 @@ router.route('/admin/msg').post((req, res) => {
                 res.status(400).send(err.originalError.info.message);
             })
     }
+});
+
+router.route('/userorder').get((req, res) => {
+    const { name, phonenumber } = req.query;
+    if (phonenumber == undefined) {
+        res.status(400).send("Bad Request!");
+    };
+    dboperations.getUserOrder(name, phonenumber).then(result => {
+        res.json(result[0]);
+    })
+        .catch(err => {
+            res.status(400).send(err);
+        })
+});
+
+router.route('/userorder/:orderid').delete((req, res) => {
+    const orderid = req.params.orderid;
+    dboperations.deleteUserOrder(orderid).then(result => {
+        res.json(result[0]);
+    })
+        .catch(err => {
+            res.status(400).send(err);
+        })
+});
+
+router.route('/restaurants/:resid/services').get((req, res) => {
+    dboperations.getRestaurantServices(req.params.resid).then(result => {
+        res.json(result[0]);
+    })
+        .catch(err => {
+            res.status(400).send(err.originalError.info.message);
+        })
 });
 
 

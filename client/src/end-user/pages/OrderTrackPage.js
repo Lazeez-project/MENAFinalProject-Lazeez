@@ -8,10 +8,16 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { DataGrid } from '@mui/x-data-grid';
+import axios from "axios";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const OrderTrackPage = () => {
 
     const [error, setError] = useState(false);
+    const [userOrder, setUserOrder] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [isEmpty, setEmpty] = useState(false);
     const [orderInfo, setOrderInfo] = useState({
         name: '',
         phoneNumber: '',
@@ -20,20 +26,46 @@ const OrderTrackPage = () => {
         name: '',
         phoneNumber: '',
     });
+    const vertical = 'top';
+    const horizontal = 'center';
 
     const handleOrderInfo = (event) => {
         const { name, value } = event.target;
-        setOrderInfo({
-            ...orderInfo,
-            [name]: value,
-        });
+
+        if (name === 'phoneNumber' && isNaN(value)) {
+
+        } else {
+            setOrderInfo({
+                ...orderInfo,
+                [name]: value,
+            });
+        }
     };
     const onSubmit = () => {
         setSubmit(orderInfo);
-        console.log(orderInfo, "This is inside onSubmit fun");
         orderInfo.phoneNumber === '' ? setError(true) : setError(false);
+        if (orderInfo.phoneNumber) {
+            axios.get(`http://localhost:8877/api//userorder?name=${orderInfo.name}&phonenumber=${orderInfo.phoneNumber}`)
+                .then((res) => {
+                    setUserOrder(res.data);
+                    res.data.length == 0 && setEmpty(true);
+                }).catch((err) => {
+                    console.log('err', err);
+                })
+        }
     }
-    console.log(submit, "This is after show");
+    const deleteOrder = (params) => {
+        console.log(params);
+        if (params.row.state == 'Waiting') {
+            axios.delete(`http://localhost:8877/api/userorder/${params.id}`)
+                .then((res) => {
+                    setOpen(true);
+                    setUserOrder(userOrder.filter(order => order.ID != res.data[0].ID))
+                }).catch((err) => {
+                    console.log('err', err);
+                })
+        }
+    }
 
     const renderDetailsButton = (params) => {
         return (
@@ -42,25 +74,26 @@ const OrderTrackPage = () => {
                     variant="contained"
                     size="small"
                     sx={{ fontSize: '10px', backgroundColor: '#ac0808', '&:hover': { backgroundColor: 'rgb(79 0 0)' } }}
-                    onClick={() => console.log(params)}
+                    disabled={params.row.state == 'Waiting' ? false : true}
+                    onClick={() => deleteOrder(params)}
                 >
                     Cancel Order
                 </Button>
-            </strong>
+            </strong >
         )
     }
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'createtime', headerName: 'Create Time', width: 150 },
+        { field: 'name', headerName: 'Name', width: 150 },
+        { field: 'createtime', headerName: 'Create Time', width: 145 },
         { field: 'mealname', headerName: 'Meal Name', width: 100 },
-        { field: 'resname', headerName: 'Restaurant Name', width: 140 },
+        { field: 'resname', headerName: 'Restaurant Name', width: 150 },
         { field: 'ordertype', headerName: 'Order Type', width: 100 },
-        { field: 'ordertime', headerName: 'Order Time', width: 100 },
-        { field: 'numberofseats', headerName: 'Number Of Seats', width: 140 },
+        { field: 'ordertime', headerName: 'Order Time', width: 145 },
         { field: 'price', headerName: 'Price', type: 'number', width: 60 },
         { field: 'count', headerName: 'Count', type: 'number', width: 70 },
-        { field: 'state', headerName: 'State', width: 70 },
+        { field: 'numberofseats', headerName: 'Seats', width: 80 },
+        { field: 'state', headerName: 'State', width: 90 },
         {
             field: 'cancel',
             headerName: 'Cancel',
@@ -69,17 +102,54 @@ const OrderTrackPage = () => {
         }
     ];
 
+    function setState(state) {
+        if (state == 0) {
+            return "Waiting"
+        } else if (state == 1) {
+            return "Preparing"
+        } else if (state == 2) {
+            return "Finished"
+        } else if (state == 3) {
+            return "Done"
+        }
+    };
+    function convert(time = "") {
+        if (time) {
+            let myTime = time.substring(11, 16);
+            let temp = Number.parseInt(myTime.substring(0, 3));
+            if (temp > 12) {
+                temp = temp - 12;
+                myTime = temp + myTime.substring(2, 5) + " pm"
+            } else {
+                if (temp == 0) {
+                    temp = 12;
+                    myTime = temp + myTime.substring(2, 5) + "am"
+                } else {
+                    myTime = temp + myTime.substring(2, 5) + " am"
+                }
+            }
+            return time.substring(0, 9) + " " + myTime;
+        } else {
+            return
+        }
+    };
 
-    const rows = [
-        { id: 1, createtime: 'meal1', mealname: 'Snow', resname: 'ordertype', ordertime: 35, numberofseats: 4, price: 20, count: 15, state: "waiting" },
-        { id: 1, createtime: 'meal1', mealname: 'Snow', resname: 'ordertype', ordertime: 35, numberofseats: 4, price: 20, count: 15, state: "waiting" },
-        { id: 1, createtime: 'meal1', mealname: 'Snow', resname: 'ordertype', ordertime: 35, numberofseats: 4, price: 20, count: 15, state: "waiting" },
-        { id: 1, createtime: 'meal1', mealname: 'Snow', resname: 'ordertype', ordertime: 35, numberofseats: 4, price: 20, count: 15, state: "waiting" },
-        { id: 1, createtime: 'meal1', mealname: 'Snow', resname: 'ordertype', ordertime: 35, numberofseats: 4, price: 20, count: 15, state: "waiting" },
-        { id: 1, createtime: 'meal1', mealname: 'Snow', resname: 'ordertype', ordertime: 35, numberofseats: 4, price: 20, count: 15, state: "waiting" },
-        { id: 1, createtime: 'meal1', mealname: 'Snow', resname: 'ordertype', ordertime: 35, numberofseats: 4, price: 20, count: 15, state: "waiting" },
-        { id: 1, createtime: 'meal1', mealname: 'Snow', resname: 'ordertype', ordertime: 35, numberofseats: 4, price: 20, count: 15, state: "waiting" },
-    ];
+    const rows = userOrder.map((order, index) => {
+        return {
+            id: order.ID,
+            index: index,
+            name: order.Name,
+            createtime: convert(order.OrderCreateTime),
+            mealname: order.MealName,
+            resname: order.RestaurantName,
+            ordertype: order.OrderType,
+            ordertime: convert(order.OrderTime),
+            price: order.Price,
+            count: order.Count,
+            numberofseats: order.NumberOfSeats,
+            state: setState(order.State)
+        }
+    });
 
     return (
         <ThemeProvider theme={CustomTheme}>
@@ -110,22 +180,43 @@ const OrderTrackPage = () => {
                             error={error}
                             helperText={error ? 'required' : ''}
                         />
-                        <Button variant='contained' onClick={onSubmit} sx={{ height: '56px' }}>Show</Button>
+                        <Button variant='contained' onClick={onSubmit} sx={{ height: '56px' }}/* href={orderInfo.phoneNumber ? `http://localhost:3000/track?${orderInfo.name ? `name=${orderInfo.name}&` : ''}phonenumber=${orderInfo.phoneNumber}` : ''}*/>Show</Button>
                     </Box>
-                    {submit.phoneNumber ? <Box sx={{ ml: 2, mt: 4, display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-                        <Typography gutterBottom sx={{ mr: 2 }} variant='h6'>Name: {orderInfo.name}</Typography>
-                        <Typography gutterBottom variant='h6'>Phone Number: {submit.phoneNumber}</Typography>
+                    {submit.phoneNumber ? <Box sx={{ ml: 2, mt: 4, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Typography gutterBottom sx={{ mr: 2 }} variant='hbody1'><Typography variant="h6" component='span' sx={{ color: 'var(--primary)' }}>Name:</Typography> {orderInfo.name}</Typography>
+                        <Typography gutterBottom variant='h6'><Typography variant="h6" component='span' sx={{ color: 'var(--primary)' }}>Phone Number: </Typography>{submit.phoneNumber}</Typography>
                     </Box> : null}
-                    <Box style={{ height: 400, width: '100%' }}>
+                    <Box style={{ width: '110%' }}>
                         <DataGrid
                             rows={rows}
                             columns={columns}
-                            pageSize={5}
-                            rowsPerPageOptions={[5]}
+                            autoHeight
                         />
                     </Box>
                 </Container>
-            </Box>
+            </Box >
+            <Snackbar
+                anchorOrigin={{ vertical, horizontal }}
+                open={open}
+                onClose={() => setOpen(false)}
+                key={'cancel'}
+                autoHideDuration={2500}
+            >
+                <Alert severity="success" sx={{ width: '100%' }}>
+                    {"Your Order Canceled >_0"}
+                </Alert>
+            </Snackbar>
+            <Snackbar
+                anchorOrigin={{ vertical, horizontal }}
+                open={isEmpty}
+                onClose={() => setEmpty(false)}
+                key={'empty'}
+                autoHideDuration={2500}
+            >
+                <Alert severity="info" sx={{ width: '100%' }}>
+                    You dont have any order yet!
+                </Alert>
+            </Snackbar> 
         </ThemeProvider >
     );
 };

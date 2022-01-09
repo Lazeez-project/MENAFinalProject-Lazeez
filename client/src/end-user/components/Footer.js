@@ -16,7 +16,8 @@ import CustomTheme from '../../assets/Theme';
 import '../../App.css';
 import { useState } from "react";
 import axios from "axios";
-
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 const FooterBox = {
     display: 'flex',
     flexDirection: { xs: 'row', md: 'column' },
@@ -37,13 +38,16 @@ const socialLinks = {
     '&:hover': { color: "var(--dark-ternary)" }
 }
 const Footer = () => {
+
     const [contact, setContact] = useState({
         Fname: '',
         Lname: '',
         email: '',
         messege: ''
     });
-
+    const [isSent, setSent] = useState(false);
+    const vertical = 'bottom';
+    const horizontal = 'right';
     const handleContact = (event) => {
         const { name, value } = event.target;
         setContact({
@@ -64,6 +68,7 @@ const Footer = () => {
                     email: '',
                     messege: ''
                 });
+                setSent(true);
             }).catch((err) => {
                 console.log(err);
             })
@@ -184,8 +189,18 @@ const Footer = () => {
 
                     </Box >
                 </Container >
+                <Snackbar
+                    anchorOrigin={{ vertical, horizontal }}
+                    open={isSent}
+                    onClose={() => setSent(false)}
+                    key={'empty'}
+                    autoHideDuration={2500}
+                >
+                    <Alert severity="success" sx={{ width: '100%' }}>
+                        {"Your Messege sent successfully >_0"}
+                    </Alert>
+                </Snackbar>
             </ThemeProvider >
-
         </Box >
     )
 };

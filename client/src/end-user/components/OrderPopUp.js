@@ -149,7 +149,7 @@ const OrderPopUp = ({ open, closePopUpPage, orderList, deleteFromOrderList, clea
     };
 
     const handleUserInfo = (event) => {
-        const { name, value } = event.target;
+        const { name, value } = event.target; 
         if (name === 'phonenumber' && isNaN(value)) {
             console.log("test", userInfo);
         } else {

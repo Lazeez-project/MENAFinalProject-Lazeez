@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CoffeeMakerIcon from "@mui/icons-material/CoffeeMaker";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
@@ -23,39 +23,8 @@ const icon = {
         backgroundColor: "var(--ternary)"
     }
 }
-const Services = () => {
-    const state = [
-        {
-            id: 0,
-            resid: 1,
-            check: false,
-        },
-        {
-            id: 1,
-            resid: 1,
-            check: true,
-        },
-        {
-            id: 2,
-            resid: 1,
-            check: true,
-        },
-        {
-            id: 3,
-            resid: 1,
-            check: true,
-        },
-        {
-            id: 3,
-            resid: 1,
-            check: true,
-        },
-        {
-            id: 5,
-            resid: 1,
-            check: true,
-        },
-    ];
+const Services = ({ resid, services, isLoading }) => {
+
     return (
         <Box
             sx={{
@@ -63,77 +32,81 @@ const Services = () => {
             }}
         >
             <Typography variant="h4" gutterBottom >Restaurant Services :</Typography>
-            <Box
-                sx={{
-                    pt: 4,
-                    textAlign: 'center',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    flexDirection: { xs: 'column', md: 'row' }
-                }}
-            >
-                {state[0].check ?
-                    <Box sx={service}>
-                        <Fab sx={icon}>
-                            <FastfoodIcon fontSize="large" />
-                        </Fab>
-                        <Typography variant="h6" gutterBottom>Fast food</Typography>
-                        <Typography variant="body2" gutterBottom>
-                            Provides the quickest service and food at the cheapest prices.
-                        </Typography>
-                    </Box> : null}
-                {state[1].check ?
-                    <Box sx={service}>
-                        <Fab sx={icon}>
-                            <DeliveryDiningIcon fontSize="large" />
-                        </Fab>
-                        <Typography variant="h6" gutterBottom>Fast Delivery</Typography>
-                        <Typography variant="body2" gutterBottom>
-                            The customer pays an extra shipping cost for this type of delivery.
-                        </Typography>
-                    </Box> : null}
+            {isLoading ?
+                <h1>Loading..</h1>
+                :
+                <Box
+                    sx={{
+                        pt: 4,
+                        textAlign: 'center',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        flexDirection: { xs: 'column', md: 'row' }
+                    }}
+                >
+                    {services[0].checked == 1 ?
+                        <Box sx={service}>
+                            <Fab sx={icon}>
+                                <FastfoodIcon fontSize="large" />
+                            </Fab>
+                            <Typography variant="h6" gutterBottom>Fast food</Typography>
+                            <Typography variant="body2" gutterBottom>
+                                Provides the quickest service and food at the cheapest prices.
+                            </Typography>
+                        </Box> : null}
+                    {services[0].checked == 1 ?
+                        <Box sx={service}>
+                            <Fab sx={icon}>
+                                <DeliveryDiningIcon fontSize="large" />
+                            </Fab>
+                            <Typography variant="h6" gutterBottom>Fast Delivery</Typography>
+                            <Typography variant="body2" gutterBottom>
+                                The customer pays an extra shipping cost for this type of delivery.
+                            </Typography>
+                        </Box> : null}
 
-                {state[2].check ?
-                    <Box sx={service}>
-                        <Fab sx={icon}>
-                            <CoffeeMakerIcon fontSize="large" />
-                        </Fab>
-                        <Typography variant="h6" gutterBottom>Hot Drinks</Typography>
-                        <Typography variant="body2" gutterBottom>
-                            Serve hot drinks quickly and simply.
-                        </Typography>
-                    </Box> : null}
-                {state[3].check ?
-                    <Box sx={service}>
-                        <Fab sx={icon}>
-                            <BedroomBabyIcon fontSize="large" />
-                        </Fab>
-                        <Typography variant="h6" gutterBottom>Children's Playrooms</Typography>
-                        <Typography variant="body2" gutterBottom>
-                            Designed for the use by children aged from 4 to 9 whose heights are not exceeding 142cm.
-                        </Typography>
-                    </Box> : null}
-                {state[4].check ?
-                    <Box sx={service}>
-                        <Fab sx={icon}>
-                            <FavoriteBorderIcon fontSize="large" />
-                        </Fab>
-                        <Typography variant="h6" gutterBottom>Healthy Food</Typography>
-                        <Typography variant="body2" gutterBottom>
-                            Delicious and fully premade healthy food  on a weekly or monthly basis.
-                        </Typography>
-                    </Box> : null}
-                {state[5].check ?
-                    <Box sx={service}>
-                        <Fab sx={icon}>
-                            <CreditCardIcon fontSize="large" />
-                        </Fab>
-                        <Typography variant="h6" gutterBottom>Credit/Debit Card Payment</Typography>
-                        <Typography variant="body2" gutterBottom>
-                            providing pay through credit/debit card.
-                        </Typography>
-                    </Box> : null}
-            </Box>
+                    {services[2].checked == 1 ?
+                        <Box sx={service}>
+                            <Fab sx={icon}>
+                                <CoffeeMakerIcon fontSize="large" />
+                            </Fab>
+                            <Typography variant="h6" gutterBottom>Hot Drinks</Typography>
+                            <Typography variant="body2" gutterBottom>
+                                Serve hot drinks quickly and simply.
+                            </Typography>
+                        </Box> : null}
+                    {services[3].checked == 1 ?
+                        <Box sx={service}>
+                            <Fab sx={icon}>
+                                <BedroomBabyIcon fontSize="large" />
+                            </Fab>
+                            <Typography variant="h6" gutterBottom>Children's Playrooms</Typography>
+                            <Typography variant="body2" gutterBottom>
+                                Designed for the use by children aged from 4 to 9 whose heights are not exceeding 142cm.
+                            </Typography>
+                        </Box> : null}
+                    {services[4].checked == 1 ?
+                        <Box sx={service}>
+                            <Fab sx={icon}>
+                                <FavoriteBorderIcon fontSize="large" />
+                            </Fab>
+                            <Typography variant="h6" gutterBottom>Healthy Food</Typography>
+                            <Typography variant="body2" gutterBottom>
+                                Delicious and fully premade healthy food  on a weekly or monthly basis.
+                            </Typography>
+                        </Box> : null}
+                    {services[5].checked == 1 ?
+                        <Box sx={service}>
+                            <Fab sx={icon}>
+                                <CreditCardIcon fontSize="large" />
+                            </Fab>
+                            <Typography variant="h6" gutterBottom>Credit/Debit Card Payment</Typography>
+                            <Typography variant="body2" gutterBottom>
+                                providing pay through credit/debit card.
+                            </Typography>
+                        </Box> : null}
+                </Box>
+            }
         </Box>
     );
 };

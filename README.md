@@ -2,7 +2,7 @@
 
 ### The problem statement:
 1) Arab restaurant in Palestine don’t have platform to share their food and the social media is not a reliable place to sell food beside it doesn't protect their copyright .
-2) Clients don't have a platform with a different type of food work , and it's hard for them to find a meal that fits their taste .
+2) Clients don't have a platform with a different type of food work , and it's hard for them to find a meal that fits their taste.
 ### The solution :
 - A Website that allows the restaurant to market their food , and  .
 - It allows client to easily obtain different types of food and meals, as well as delivery to their places of request, especially in emergency situations such as home reservations in Corona and other emergencies.
@@ -12,8 +12,9 @@ https://www.figma.com/file/xzE0CRr7spKknSLBdb36t3/Resturants?node-id=22%3A57
 
 
 ### User Journey : 
-- As restaurant , I can create an account and post 
-- As client, Ican order the meals.
+- Admin
+- Restaurant Owner
+- Users
 
 ### User Story : 
 ####  restaurant :
@@ -35,12 +36,14 @@ Clone this repo to your local machine using terminal:
 
 run these commands in your terminal:
 ```
- $ cd Lazeez
+ $ cd MENAFinalProject-Lazzez
+ $ cd client
  $ npm i
- $ cd 
- $ npm i
+ $ npm start
  $ cd ..
- $ 
+ $ cd server
+ $ npm i
+ $ npm start
  ```
  ## Used Technologies
 #### Front end
@@ -51,6 +54,9 @@ run these commands in your terminal:
 #### Back end 
 
  -  Express
+
+ #### Data base 
+
  -  MsSQL
 
 ## work group 

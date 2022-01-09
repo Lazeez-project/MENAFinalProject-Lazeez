@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-محمود
-=======
-Hi, this is Mohamed Muin Ubeid.
->>>>>>> cd3f1d1f76529d18d1bb8556880a57ee4805e33e

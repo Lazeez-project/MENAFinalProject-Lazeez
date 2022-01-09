@@ -10,12 +10,32 @@ import { useParams } from 'react-router-dom';
 import axios from "axios";
 import Grid from '@mui/material/Grid';
 import Skeleton from '@mui/material/Skeleton';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+
 const RestaurantPage = () => {
     const { resid } = useParams();
     const [resAbout, setResAbout] = useState({});
     const [meals, setMeals] = useState([]);
     const [isResLoading, setResLoading] = useState(true);
     const [isMealLoading, setMealLoading] = useState(true);
+    const [services, setServices] = useState([]);
+    const [isServicesLoading, setServicesLoading] = useState(true);
+    const [isopen, setOpen] = useState(false);
+
+    const vertical = 'top';
+    const horizontal = 'center';
+
+    useEffect(() => {
+        setServicesLoading(true);
+        axios.get(`http://localhost:8877/api/restaurants/${resid}/services`)
+            .then((res) => {
+                setServices(res.data);
+                setServicesLoading(false);
+            }).catch((err) => {
+                console.log('err', err);
+            })
+    }, []);
     useEffect(() => {
         setResLoading(true);
         axios.get(`http://localhost:8877/api/restaurants/${resid}`)
@@ -32,11 +52,13 @@ const RestaurantPage = () => {
             .then((res) => {
                 setMeals(res.data);
                 setMealLoading(false);
+                if(res.data.length == 0) {
+                    setOpen(true);
+                }
             }).catch((err) => {
                 console.log('err', err);
             })
     }, [resid]);
-
     return (
         <ThemeProvider theme={CustomTheme}>
             <Box sx={{ backgroundColor: 'var(--transparent-secondary)', pt: 5 }}>
@@ -53,7 +75,7 @@ const RestaurantPage = () => {
                         :
                         <AboutRestaurant restaurantData={resAbout} />
                     }
-                    <Services />
+                    {isServicesLoading || services.length == 0 ? null : <Services resid={resid} isLoading={isServicesLoading} services={services} />}
                     {isMealLoading ?
                         <Grid spacing={{ xs: '0', md: '7' }} container>
                             {Array.from(new Array(3)).map((item, index) => (
@@ -70,10 +92,21 @@ const RestaurantPage = () => {
                             ))}
                         </Grid>
                         :
-                        <MealCards MealData={meals} resID={resAbout.id}/>
+                        meals.length > 0 ? <MealCards MealData={meals} resID={resAbout.id} /> : null
                     }
                 </Container>
             </Box>
+            <Snackbar
+                anchorOrigin={{ vertical, horizontal }}
+                open={isopen}
+                onClose={() => setOpen(false)}
+                key={'empty'}
+                sx={{mt: 7}}
+            >
+                <Alert severity="warning" sx={{ width: '100%' }}>
+                    {"This Restaurant dosn't have meals"}
+                </Alert>
+            </Snackbar>
         </ThemeProvider >
     );
 };

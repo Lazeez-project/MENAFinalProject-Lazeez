@@ -48,10 +48,7 @@ const AboutRestaurant = (props) => {
             return { url: `/Images/${item}` }
         }
     });
-    console.log(images);
-    /*images.push({
-        url: `/Images/${pictures}`,
-    });*/
+
     function convert(time = "") {
         let myTime = time.substring(11, 16);
         let temp = Number.parseInt(myTime.substring(0, 3));
