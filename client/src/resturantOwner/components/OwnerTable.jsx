@@ -27,7 +27,6 @@ const AdminTable = (props) => {
         style={{backgroundColor: '#fff', width: '93%', margin : '10px 3.5%'}}
         columnBuffer="6"
         disableVirtualization="true"
-        disableExtendRowFullWidth="true"
         autoPageSize="true"
         autoHeight="false"
         columns={header}

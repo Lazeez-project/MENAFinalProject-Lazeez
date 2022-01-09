@@ -19,8 +19,8 @@ const Orders = () => {
         { field: 'email', headerName: 'Email', minWidth: 191, },
         { field: 'create_time', headerName: 'Creation Time', minWidth: 191, ttype: 'dateTime', valueGetter: ({ value }) => value && new Date(value) },
         { field: 'numberofseats', headerName: 'Seats No.', minWidth: 10, },
-        { field: 'ordertype', headerName: 'Type', minWidth: 20, },
-        { field: 'order_time', headerName: 'Time', minWidth: 20, },
+        { field: 'ordertype', headerName: 'Type', minWidth: 20},
+        { field: 'order_time', headerName: 'Time', minWidth: 200,ttype: 'dateTime' , valueGetter: ({ value }) => value && new Date(value) },
         { field: 'mealname', headerName: 'Meal', minWidth: 219, },
         { field: 'count', headerName: 'Count', minWidth: 10, },
         { field: 'price', headerName: 'Price', minWidth: 10, renderCell: (cellvalues) => cellvalues.row.price[0] },
@@ -115,7 +115,7 @@ const Orders = () => {
                 setNumbers(response.data)
                 setIsLoadingNum(false)
             })
-    }, [])
+    }, [reFetch])
 
     return (
         <ThemeProvider theme={CustomTheme}>

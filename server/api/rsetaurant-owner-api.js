@@ -116,23 +116,26 @@ router.route('/restaurantowner/restaurant/:id').put((req, res) => {
             .catch(err => res.status(404).send('Check Your Data Please'))
     }
 });
+
+
 router.route('/restaurantowner/restaurant/:id').delete((req, res) => {                 /*error*/
     const { id } = req.params
     let pictures = '';
+    console.log(id);
     dboperations.getRestaurant(id).then(result => {
         pictures = result[0][0].pictures;
-        console.log(pictures);
         if (pictures !== null) {
             arr = pictures.split(',')
-            arr.map(item => { if (item !== '') { fs.unlinkSync(`../client/public/Images/${item}`) } })
+            arr.map(item => { if (item !== '') { fs.unlink(`../client/public/Images/${item}`, (err) => {
+                if(err){
+                    res.status(500)
+                }
+            })} })
         }
-        dboperations.deleteRestaurant(id).then(resulte => {
-            dboperations.deleteRestaServices(id).then(reslt => {
-                dboperations.deleteRes(id).then((resulte) => {
-                    res.json(resulte[0]);
-                });
-            })
+        dboperations.deleteRestaurant(id).then(result => {
+            res.json(result[0])
         })
+        .catch(err => res.json(500))
     })
 });
 

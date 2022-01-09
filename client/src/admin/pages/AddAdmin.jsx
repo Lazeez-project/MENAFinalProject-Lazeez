@@ -33,7 +33,6 @@ const AddMeal = () => {
 
 
   const sendData = () => {
-    console.log(data);
     if (data.password === data.confirm) {
       axios({
         method: 'post',

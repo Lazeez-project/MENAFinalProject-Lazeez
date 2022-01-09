@@ -96,7 +96,7 @@ async function getOrders(id) {
     let pool = await sql.connect(config)
     let orders = await pool.request()
         .input('resid', sql.Int, id)
-        .query('select orderlist.id, orderusers.create_time, meals.mealname, restaurant.name, orderusers.ordertype, orderusers.order_time, orderusers.numberofseats, orderlist.price, orderlist.count, orderlist.state from  (orderlist right join orderusers on (orderlist.userid = orderusers.id) ) right join (restaurant right join meals on (restaurant.id = meals.resId)) on (orderlist.resid = restaurant.id) where restaurant.id = @resid and orderlist.mealid = meals.id')
+        .query('select orderlist.id, orderusers.name, orderusers.location,orderusers.phonenumber,orderusers.email, orderusers.create_time, meals.mealname, orderusers.ordertype, orderusers.order_time, orderusers.numberofseats, orderlist.price, orderlist.count, orderlist.state from  (orderlist  join orderusers on (orderlist.userid = orderusers.id)) join restaurant on ( orderlist.resid = restaurant.id) join meals on (orderlist.mealid = meals.id) where restaurant.id = @resid')
     return orders.recordsets
 }
 
@@ -317,40 +317,23 @@ async function updateServices(serv) {
 }
 
 
-async function deleteRes(id) {
-    let pool = await sql.connect(config);
-    let restaurant = await pool.request()
-        .input('id', sql.Int, id)
-        .query("DELETE FROM restaurant WHERE id = @id ");
-
-    return restaurant.recordset;
-}
-
-async function deleteRestaurant(id) {
-    let pool = await sql.connect(config);
-    let user = await pool.request()
-        .input('id', sql.Int, id)
-        .query("DELETE FROM users WHERE resid = @id ");
-
-    return user.recordset;
-}
-
-async function deleteRestaServices(id) {
-    let pool = await sql.connect(config);
-    let user = await pool.request()
-        .input('id', sql.Int, id)
-        .query("DELETE FROM services WHERE resid = @id ")
-
-    return user.recordset;
-}
-
-
 async function getRestaurants() {
     let pool = await sql.connect(config)
     let restaurant = await pool.request().query('SELECT * FROM restaurant WHERE state > 0')
     return restaurant.recordsets;
 }
 
+
+
+async function deleteRestaurant(id){
+
+    let pool = await sql.connect(config)
+    let restaurant = await pool.request()
+                            .input('id', sql.Int , id)
+                            .query('DELETE FROM orderlist WHERE resid = @id;DELETE FROM orderusers WHERE resid = @id;DELETE FROM meals WHERE resid = @id;DELETE FROM users WHERE resid = @id;DELETE FROM services WHERE resid = @id;DELETE FROM restaurant WHERE id = @id;')
+    return restaurant.recordsets;
+
+}
 
 module.exports = {
     register: register,
@@ -375,8 +358,6 @@ module.exports = {
     setServices: setServices,
     updateServices: updateServices,
     updateStateOrder: updateStateOrder,
-    deleteRestaServices: deleteRestaServices,
+    getRestaurants: getRestaurants,
     deleteRestaurant: deleteRestaurant,
-    deleteRes: deleteRes,
-    getRestaurants: getRestaurants
 }

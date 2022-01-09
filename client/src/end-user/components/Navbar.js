@@ -81,10 +81,11 @@ const Navbar = () => {
 
                         {/*Logo*/}
                         <IconButton sx={{ flexGrow: 1, textAlign: 'center' }}>
-                            {/*<img src={logo}
+                            <img src={'Images/logo1.png'}
+                                width={95}
                                 alt='logo'
-                            className="logo" />*/}
-                            Logo
+                            className="logo" />
+                            {/* Logo */}
                         </IconButton>
 
 

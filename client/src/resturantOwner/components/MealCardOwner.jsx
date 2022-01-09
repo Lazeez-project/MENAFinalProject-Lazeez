@@ -55,7 +55,7 @@ const MealCardOwner = (props) => {
                 <Snackbar
                     autoHideDuration={6000}
                     open={alertOpen}
-                    onClose={handleAlertClose}
+                    onClose={`${handleAlertClose}5`}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                     message="The Username or Password is not exist"
                     key={'top' + 'center'}
@@ -80,8 +80,8 @@ const MealCardOwner = (props) => {
                         <ul className="ingredints">
                             {
                                 (meal.Ingredients !== null) ?
-                                    meal.Ingredients.split(',').map(item => (
-                                        <li key={meal.id}>{item}</li>
+                                    meal.Ingredients.split(',').map((item,index) => (
+                                        <li key={index}>{item}</li>
                                     ))
                                     : ''
                             }

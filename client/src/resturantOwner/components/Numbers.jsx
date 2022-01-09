@@ -7,7 +7,6 @@ const Numbers = (props) => {
         <ThemeProvider theme={CustomTheme}>
             <Paper
                 className="numCard"
-                elevation="3"
                 sx={{
                     minWidth: "250px",
                     p: 2,

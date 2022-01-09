@@ -12,7 +12,7 @@ import axios from "axios";
 
 const Orders = () => {
     const {id} = useParams()
-    
+
     const header = [
         { field: 'name', headerName : 'Name', minWidth: 200 },
         { field: 'location', headerName : 'Location', minWidth: 200 },
@@ -58,13 +58,12 @@ const Orders = () => {
                                 variant="contained"
                                 color="error"
                                 size="small"
-                                onClick={(event) => {
-                                    handleDeleteClick(event, cellValues);
-                                }}
+                                onClick={(event)=>handleDeleteClick(event, cellValues.row.id)}
                                 href={`#`}
                                 >
                                 Delete
                             </Button>
+
                         </div>;
             }
         }
@@ -97,21 +96,20 @@ const Orders = () => {
         }
     };
 
-    const handleDeleteClick = (event, cellValues) => {
-        axios.delete(`http://localhost:8877/api/restaurantowner/restaurant/${cellValues.row.id}`)
+    const handleDeleteClick = (event, id) => {
+        axios.delete(`http://localhost:8877/api/restaurantowner/restaurant/${id}`)
         .then(response => {
-            
+            window.location.reload(false)
         })
-        .catch(err => alert(err))
+        .catch(err => window.location.reload(false))
         
         setReFetch(reFetch + 1)
-
         };
 
     useEffect(()=>{
         axios.get('http://localhost:8877/api/restaurantowner/restaurants')
         .then(response => setTableBody(response.data[0]))
-
+        
         axios.get(`http://localhost:8877/api/admin/restaurants/numbers`)
         .then(response => {
             setNumbers(response.data)

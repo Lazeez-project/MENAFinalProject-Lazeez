@@ -132,26 +132,20 @@ router.route('/admin/pending/:id').put((req, res) => {
     })
         .catch(err => res.status(500))
 });
-router.route('/admin/pending/:id').delete((req, res) => {
+
+router.route('/restaurantowner/restaurant/:id').delete((req, res) => {                 /*error*/
     const { id } = req.params
     let pictures = '';
     dboperations.getRestaurant(id).then(result => {
         pictures = result[0][0].pictures;
-        console.log(pictures);
         if (pictures !== null) {
             arr = pictures.split(',')
             arr.map(item => { if (item !== '') { fs.unlinkSync(`../client/public/Images/${item}`) } })
         }
-        dboperations.deleteRestaurant(id).then(resulte => {
-            dboperations.deleteRestaServices(id).then(reslt => {
-                dboperations.deleteRes(id).then((resulte) => {
-                    res.json(resulte[0]);
-                })
-                    .catch(err => res.status(500))
-            })
-                .catch(err => res.status(500))
+        dboperations.deleteRestaurant(id).then(result => {
+            res.json(result[0])
         })
-            .catch(err => res.status(500))
+        .catch(err => res.json(500))
     })
 });
 
@@ -172,4 +166,5 @@ router.route('/admin/restaurants/numbers').get((req, res) => {
         })
     })
 });
+
 module.exports = router;

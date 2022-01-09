@@ -89,7 +89,7 @@ const AddMeal = () => {
             >
                 {alert}
             </Snackbar>
-            <h2 className="page__title" style={{ fontSize: '70px' }}>Add New Meal</h2>
+            <h2 className="page__title" style={{ fontSize: '40px', marginTop: '50px' }}>Add New Meal</h2>
             <Input inputValue={makeMeal} name="name" title="Meal's Name" plaseholder="The Meal Name" type="text" />
             <Input inputValue={makeMeal} name="price" title="Meal's Price" plaseholder="The Meal price" type="number" />
             <Input inputValue={makeMealImage} name="picture" title="Meal's Picture" type="file" />

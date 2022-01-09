@@ -36,9 +36,6 @@ const defaultValue = {
   mobilenumber: null
 }
 
-const requireIcon = () => {
-  return (<span style={{ color: 'red' }}>*</span>)
-}
 
 const Form = () => {
   const [formValues, setFormValues] = useState(defaultValue)
@@ -133,7 +130,7 @@ const Form = () => {
           </Typography>
 
           <Box sx={{ display: "flex", flexDirection: "row", alignItems: 'center', width: '100%' }}>
-            <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Restaurant Name</Typography>
+            <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Restaurant Name <span style={{color:'red'}}>*</span></Typography>
             <TextField
               sx={{
                 backgroundColor: "#fff",
@@ -148,7 +145,7 @@ const Form = () => {
             />
           </Box>
           <Box sx={{ display: "flex", flexDirection: "row", alignItems: 'center', marginTop: { xs: '10px', lg: '20px' }, width: '100%' }}>
-            <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Location<requireIcon /></Typography>
+            <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Location <span style={{color:'red'}}>*</span></Typography>
             <TextField
               sx={{
                 backgroundColor: "#fff",
@@ -163,7 +160,7 @@ const Form = () => {
             />
           </Box>
           <Box sx={{ display: "flex", flexDirection: "row", alignItems: 'center', marginTop: { xs: '10px', lg: '20px' }, width: '100%' }}>
-            <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Username</Typography>
+            <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Username <span style={{color:'red'}}>*</span></Typography>
             <TextField
               sx={{
                 backgroundColor: "#fff",
@@ -178,7 +175,7 @@ const Form = () => {
             />
           </Box>
           <Box sx={{ display: "flex", flexDirection: "row", alignItems: 'center', marginTop: { xs: '10px', lg: '20px' }, width: '100%' }}>
-            <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Password</Typography>
+            <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Password <span style={{color:'red'}}>*</span></Typography>
             <TextField
               sx={{
                 backgroundColor: "#fff",
@@ -206,7 +203,7 @@ const Form = () => {
               Resturant Pictures:
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "row", alignItems: 'center', marginTop: { xs: '10px', lg: '20px' }, width: '100%' }}>
-              <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Pictures 1</Typography>
+              <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Pictures 1 <span style={{color:'red'}}>*</span></Typography>
               <input
                 sx={{
                   backgroundColor: "#fff",
@@ -276,7 +273,7 @@ const Form = () => {
               About Your Restaurant:
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "row", alignItems: 'center', marginTop: 2 }}>
-              <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Times</Typography>
+              <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Times <span style={{color:'red'}}>*</span></Typography>
               <Box sx={{ width: { xs: '70%', md: '60%' } }}>
                 <input
                   id="fromTim"
@@ -296,7 +293,7 @@ const Form = () => {
               </Box>
             </Box>
             <Box sx={{ display: "flex", flexDirection: "row", marginTop: 2 }}>
-              <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Available days</Typography>
+              <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Available days <span style={{color:'red'}}>*</span></Typography>
               <Box sx={{ width: { xs: '70%', md: '60%' }, display: 'flex', flexWrap: 'wrap' }}>
                 <Box sx={{ marginRight: '5px' }}>
                   <Checkbox
@@ -373,7 +370,7 @@ const Form = () => {
               Contact:
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "row", alignItems: 'center', marginTop: 2 }}>
-              <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Phone Number</Typography>
+              <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Phone Number <span style={{color:'red'}}>*</span></Typography>
               <TextField
                 sx={{ width: { xs: '70%', md: '60%' }, backgroundColor: '#fff' }}
                 size="small"
@@ -400,7 +397,7 @@ const Form = () => {
               />
             </Box>
             <Box sx={{ display: "flex", flexDirection: "row", alignItems: 'center', marginTop: 2 }}>
-              <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Email</Typography>
+              <Typography variant="p" sx={{ fontSize: { xs: '14px', md: '20px' }, width: { xs: '30%', md: '40%' } }}>Email <span style={{color:'red'}}>*</span></Typography>
               <TextField
                 sx={{
                   backgroundColor: "#fff",

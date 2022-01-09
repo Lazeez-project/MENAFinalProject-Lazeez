@@ -154,7 +154,7 @@ const Form = () => {
                 <Typography
                   variant="h2"
                   sx={{
-                    color: "var(--main-color)",
+                    color: 'var(--primary)',
                     fontWeight: "500",
                     paddingTop: 5,
                     fontSize: { xs: '22px', md: '26px', lg: '35px' },
@@ -260,7 +260,7 @@ const Form = () => {
                 <Typography
                   variant="h2"
                   sx={{
-                    color: "var(--main-color)",
+                    color: 'var(--primary)',
                     fontWeight: "500",
                     paddingTop: 5,
                     fontSize: { xs: '22px', md: '26px', lg: '35px' },

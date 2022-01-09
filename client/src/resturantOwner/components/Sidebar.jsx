@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink,useNavigate } from "react-router-dom"
 import { Box } from "@mui/system"
 import Typography from "@mui/material/Typography";
 
@@ -19,6 +19,8 @@ import Snackbar from '@mui/material/Snackbar'
 
 const Sidebar = (props) => {
 
+    const navigate = useNavigate();
+
     const { id } = useParams()
 
     const [name, setName] = useState('Restaurant Owner')
@@ -29,11 +31,13 @@ const Sidebar = (props) => {
         axios.get(`http://localhost:8877/api/restaurantowner/restaurant/${id}`)
             .then(response => {
                 setName(response.data[0].name)
-                console.log(response.data[0]);
                 if (response.data[0].state == 2) {
                     setAlert(<Alert variant='filled' severity="error">Your Restaurant is not Active</Alert>)
                     setOpen(true)
                 }
+            })
+            .catch(err =>{
+                navigate('/resturant/owner/')
             })
     }, [])
 
@@ -58,13 +62,13 @@ const Sidebar = (props) => {
                 {name}
             </Typography>
             <ul className="sidebar__list" style={{ listStyle: 'none', paddingLeft: 0 }}>
-                <li><NavLink to={`/resturant/owner/dashboard/${props.id}/`} ><RoomServiceIcon /><Typography noWrap="true" sx={{ display: { xs: 'none', lg: 'block' } }}>Orders</Typography></NavLink></li>
-                <li><NavLink to={`/resturant/owner/dashboard/${props.id}/mymeals`} ><LunchDiningIcon /><Typography noWrap="true" sx={{ display: { xs: 'none', lg: 'block' } }}>My Meals</Typography></NavLink></li>
-                <li><NavLink to={`/resturant/owner/dashboard/${props.id}/addmeal`} ><AddIcon /><Typography noWrap="true" sx={{ display: { xs: 'none', lg: 'block' } }}>Add Meal</Typography></NavLink></li>
-                <li><NavLink to={`/resturant/owner/dashboard/${props.id}/updatedata`} ><EditIcon /><Typography noWrap="true" sx={{ display: { xs: 'none', lg: 'block' } }}>Update Data</Typography></NavLink></li>
-                <li><NavLink to={`/resturant/owner/dashboard/${props.id}/services`} ><HomeRepairServiceIcon /><Typography noWrap="true" sx={{ display: { xs: 'none', lg: 'block' } }}>Services</Typography></NavLink></li>
-                <li><NavLink to={`/resturant/owner/dashboard/${props.id}/changepassword`} ><VpnKeyIcon /><Typography noWrap="true" sx={{ display: { xs: 'none', lg: 'block' } }}>Change Password</Typography></NavLink></li>
-                <li><NavLink to={`../../`}><LogoutIcon /><Typography noWrap="true" sx={{ display: { xs: 'none', lg: 'block' } }}>Log out</Typography></NavLink></li>
+                <li><NavLink to={`/resturant/owner/dashboard/${props.id}/`} ><RoomServiceIcon /><Typography sx={{ display: { xs: 'none', lg: 'block' } }}>Orders</Typography></NavLink></li>
+                <li><NavLink to={`/resturant/owner/dashboard/${props.id}/mymeals`} ><LunchDiningIcon /><Typography sx={{ display: { xs: 'none', lg: 'block' } }}>My Meals</Typography></NavLink></li>
+                <li><NavLink to={`/resturant/owner/dashboard/${props.id}/addmeal`} ><AddIcon /><Typography sx={{ display: { xs: 'none', lg: 'block' } }}>Add Meal</Typography></NavLink></li>
+                <li><NavLink to={`/resturant/owner/dashboard/${props.id}/updatedata`} ><EditIcon /><Typography sx={{ display: { xs: 'none', lg: 'block' } }}>Update Data</Typography></NavLink></li>
+                <li><NavLink to={`/resturant/owner/dashboard/${props.id}/services`} ><HomeRepairServiceIcon /><Typography sx={{ display: { xs: 'none', lg: 'block' } }}>Services</Typography></NavLink></li>
+                <li><NavLink to={`/resturant/owner/dashboard/${props.id}/changepassword`} ><VpnKeyIcon /><Typography sx={{ display: { xs: 'none', lg: 'block' } }}>Change Password</Typography></NavLink></li>
+                <li><NavLink reloadDocument="true" to={`../../`}><LogoutIcon /><Typography sx={{ display: { xs: 'none', lg: 'block' } }}>Log out</Typography></NavLink></li>
             </ul>
         </Box>
     );

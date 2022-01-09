@@ -20,7 +20,7 @@ const Sidebar = (props) => {
                 <li><NavLink to={`/admin/dashboard/${props.id}/massages`} ><EmailIcon></EmailIcon><Typography sx={{ display: { xs: 'none', lg: 'block' } }}>Massages</Typography></NavLink></li>
                 <li><NavLink to={`/admin/dashboard/${props.id}/addadmin`} ><PersonAddIcon></PersonAddIcon><Typography sx={{ display: { xs: 'none', lg: 'block' } }}>New Admin</Typography></NavLink></li>
                 <li><NavLink to={`/admin/dashboard/${props.id}/changepassword`} ><VpnKeyIcon></VpnKeyIcon><Typography sx={{ display: { xs: 'none', lg: 'block' } }}>Change Password</Typography></NavLink></li>
-                <li><NavLink to={`../../`}><LogoutIcon /><Typography sx={{ display: { xs: 'none', lg: 'block' } }}>Log out</Typography></NavLink></li>
+                <li><NavLink reloadDocument="true" to={`../../`}><LogoutIcon /><Typography sx={{ display: { xs: 'none', lg: 'block' } }}>Log out</Typography></NavLink></li>
             </ul>
         </Box>
     )

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import Typography from "@mui/material/Typography"
-import { Box } from '@mui/system'
+import { Box, fontSize } from '@mui/system'
 import MealCardOwner from "../components/MealCardOwner"
 import { useParams } from "react-router"
 import axios from "axios"
@@ -35,7 +35,8 @@ const MyMeals = () => {
                         sx={{
                             marginLeft: '18px',
                             fontWeight: 600,
-                            color: 'var(--main-color)'
+                            color: 'var(--primary)',
+                            fontSize : '30px'
                         }}>
                         My Meals :
                     </Typography>
@@ -64,8 +65,8 @@ const MyMeals = () => {
                                 </Box>
                             ))
                             : meals.length > 0
-                                ? meals.map(item => (
-                                    <MealCardOwner key={item.id} meal={item} />
+                                ? meals.map((item,index) => (
+                                    <MealCardOwner key={index} meal={item} />
                                 ))
                                 : <Alert severity="warning">You don't have any Meals, Please add some Meals</Alert>
                     }

@@ -77,33 +77,6 @@ async function disactiveRes(id) {
     return pend.recordset;
 }
 
-async function deleteRes(id) {
-    let pool = await sql.connect(config);
-    let restaurant = await pool.request()
-        .input('id', sql.Int, id)
-        .query("DELETE FROM restaurant WHERE id = @id ");
-
-    return restaurant.recordset;
-}
-
-async function deleteRestaurant(id) {
-    let pool = await sql.connect(config);
-    let user = await pool.request()
-        .input('id', sql.Int, id)
-        .query("DELETE FROM users WHERE resid = @id ");
-
-    return user.recordset;
-}
-
-async function deleteRestaServices(id) {
-    let pool = await sql.connect(config);
-    let user = await pool.request()
-        .input('id', sql.Int, id)
-        .query("DELETE FROM services WHERE resid = @id ")
-
-    return user.recordset;
-}
-
 
 async function updateRestaurantData(id, body) {
     let pool = await sql.connect(config)
@@ -174,6 +147,17 @@ async function activeMessages(id, isread) {
 }
 
 
+async function deleteRestaurant(id){
+
+    let pool = await sql.connect(config)
+    let restaurant = await pool.request()
+                            .input('id', sql.Int , id)
+                            .query('DELETE FROM orderlist WHERE resid = @id;DELETE FROM orderusers WHERE resid = @id;DELETE FROM meals WHERE resid = @id;DELETE FROM users WHERE resid = @id;DELETE FROM services WHERE resid = @id;DELETE FROM restaurant WHERE id = @id;')
+    return restaurant.recordsets;
+
+}
+
+
 module.exports = {
     getAdmins: getAdmins,
     getAdmin: getAdmin,
@@ -185,11 +169,9 @@ module.exports = {
     getPending: getPending,
     activeRes: activeRes,
     disactiveRes: disactiveRes,
-    deleteRes: deleteRes,
-    deleteRestaurant: deleteRestaurant,
-    deleteRestaServices: deleteRestaServices,
     getRestaurants: getRestaurants,
     deleteMessages: deleteMessages,
     activeMessages: activeMessages,
-    getRestaurantsNum: getRestaurantsNum
+    getRestaurantsNum: getRestaurantsNum,
+    deleteRestaurant: deleteRestaurant,
 }
