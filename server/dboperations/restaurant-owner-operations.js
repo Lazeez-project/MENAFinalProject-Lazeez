@@ -230,7 +230,7 @@ async function getRestaurant(id) {
 }
 async function getRestaurants() {
     let pool = await sql.connect(config)
-    let restaurant = await pool.request().query('SELECT * FROM restaurant WHERE state > 0')
+    let restaurant = await pool.request().query('SELECT * FROM restaurant WHERE state > 0 ORDER BY id DESC')
     return restaurant.recordsets
 }
 

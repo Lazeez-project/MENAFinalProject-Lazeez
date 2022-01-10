@@ -47,7 +47,7 @@ async function chngAdminPass(id, pass) {
 async function getPending() {
     let pool = await sql.connect(config);
     let pend = await pool.request()
-        .query("SELECT * FROM restaurant WHERE state = 0 ");
+        .query("SELECT * FROM restaurant WHERE state = 0");
 
     return pend.recordset;
 }
@@ -55,7 +55,7 @@ async function getPending() {
 async function getMessages() {
     let pool = await sql.connect(config);
     let message = await pool.request().query(
-        "SELECT * FROM masseges"
+        "SELECT * FROM masseges ORDER BY isread ASC, id DESC"
     );
     return message.recordsets;
 }
@@ -104,11 +104,10 @@ async function updateRestaurantData(id, body) {
 
 async function getRestaurants() {
     let pool = await sql.connect(config)
-    let restaurant = await pool.request().query('SELECT * FROM restaurant WHERE state > 0')
+    let restaurant = await pool.request().query('SELECT * FROM restaurant WHERE state > 0 ORDER BY id')
 
     return restaurant.recordsets
 }
-
 
 async function getRestaurantsNum(state) {
     if (typeof state == 'number') {

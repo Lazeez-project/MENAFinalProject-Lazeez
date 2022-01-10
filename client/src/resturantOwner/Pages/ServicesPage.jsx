@@ -145,8 +145,7 @@ function ServicesPage() {
                             <BedroomBabyIcon fontSize="large" sx={{ color: "var(--primary)", '&:hover': { color: 'var(--secondary)' } }} />
                         </Fab>
                         
-                        <Typography variant="h4" marginBottom="10px" component="div">
-                            <Checkbox id="3" checked={services[3].checked}  size="large" sx={{position : 'absolute', top: '0', left : '0'}} onChange={handelService} /> Children's Playrooms</Typography>
+                        <Typography variant="h4" marginBottom="10px" component="div">Children's Playrooms</Typography>
                         <Typography>
                             Designed for the use by children aged from 4 to 9 whose heights are not exceeding 142cm
                         </Typography>
