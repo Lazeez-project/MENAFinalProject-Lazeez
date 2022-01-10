@@ -105,7 +105,7 @@ const Footer = () => {
                             <Typography variant="h6" sx={typoTitle}>Follow Us: </Typography>
                             <Box sx={FooterBox}>
                                 <Link
-                                    href="https://www.facebook.com/"
+                                    href="https://www.facebook.com/Lazeez-105861395321223/"
                                     target="_blank"
                                     underline="none"
                                     color="ternary.main"
@@ -114,7 +114,7 @@ const Footer = () => {
                                     <FacebookRoundedIcon sx={{ color: "#4267B2" }} /> Facebook
                                 </Link>
                                 <Link
-                                    href="https://www.instagram.com/"
+                                    href="https://instagram.com/lazeez._.11?utm_medium=copy_link"
                                     target="_blank"
                                     underline="none"
                                     color="ternary.main"

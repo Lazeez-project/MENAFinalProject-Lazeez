@@ -36,13 +36,7 @@ router.route('/restaurants/:resid').get((req, res) => {
 router.route('/restaurants/:resid/meals').get((req, res) => {
     const resId = req.params.resid;
     dboperations.getMeals(resId).then(result => {
-        /*if (result[0].length !== 0) {
-            res.json(result[0]);
-        } else {
-            res.status(404).json({
-                msg: "Not found!",
-            });
-        }*/
+
         res.json(result[0]);
 
     })

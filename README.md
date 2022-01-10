@@ -11,6 +11,14 @@
 https://www.figma.com/file/xzE0CRr7spKknSLBdb36t3/Resturants?node-id=22%3A57
 
 
+### Web Site Link on Instagram
+https://instagram.com/lazeez._.11?utm_medium=copy_link
+
+### Web Site Link on Facebook
+https://www.facebook.com/Lazeez-105861395321223/
+
+
+
 ### User Journey : 
 - Admin
 - Restaurant Owner

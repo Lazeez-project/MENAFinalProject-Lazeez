@@ -116,7 +116,7 @@ const OrderTrackPage = () => {
     function convert(time = "") {
         if (time) {
             let myTime = time.substring(11, 16);
-            let temp = Number.parseInt(myTime.substring(0, 3));
+            let temp = Number.parseInt(myTime.substring(0, 3)) + 2;
             if (temp > 12) {
                 temp = temp - 12;
                 myTime = temp + myTime.substring(2, 5) + " pm"
@@ -216,7 +216,7 @@ const OrderTrackPage = () => {
                 <Alert severity="info" sx={{ width: '100%' }}>
                     You dont have any order yet!
                 </Alert>
-            </Snackbar> 
+            </Snackbar>
         </ThemeProvider >
     );
 };

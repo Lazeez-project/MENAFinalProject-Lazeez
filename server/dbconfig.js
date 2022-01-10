@@ -1,10 +1,10 @@
 const config = {
-    user: 'mahmoud',
-    password: 'mahmoud',
+    user: 'sa',
+    password: '12345678',
     server: "localhost",
-    database: 'Lazeez3',
+    database: 'Lazeez',
     trustServerCertificate: true,
-}
+};
 
 
 module.exports = config;

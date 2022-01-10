@@ -80,13 +80,15 @@ const Navbar = () => {
                         </Menu>
 
                         {/*Logo*/}
-                        <IconButton sx={{ flexGrow: 1, textAlign: 'center' }}>
-                            <img src={'Images/logo1.png'}
-                                width={95}
+                        
+                            <IconButton sx={{ flexGrow: 1, textAlign: 'center', p:0, m:0 }}>
+                            <img src={'/Images/logo1.png'}
+                                width={85}
                                 alt='logo'
                             className="logo" />
-                            {/* Logo */}
                         </IconButton>
+
+
 
 
                         {/*Links*/}
