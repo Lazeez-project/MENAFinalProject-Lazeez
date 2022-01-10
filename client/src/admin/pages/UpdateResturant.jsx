@@ -330,7 +330,7 @@ const Form = () => {
               variant="contained"
               type="submit"
               sx={{
-                backgroundColor: "var(--main-color)",
+                backgroundColor: "var(--primary)",
                 color: "white",
                 marginTop: '20px',
                 display: 'block',

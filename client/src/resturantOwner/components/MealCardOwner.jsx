@@ -16,6 +16,7 @@ import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 import CustomTheme from '../../assets/Theme';
 import { ThemeProvider } from '@mui/styles';
+import { Box } from '@mui/material';
 
 const MealCardOwner = (props) => {
 
@@ -51,11 +52,11 @@ const MealCardOwner = (props) => {
 
     return (
         <ThemeProvider theme={CustomTheme}>
-            <Card sx={{ maxWidth: 340, boxShadow: "0 10px 20px #00000033", margin: '18px' }} >
+            <Card sx={{ width: {xs : '100%', md : '35%', lg : '30%'}, boxShadow: "0 10px 20px #00000033", margin: '18px' }} >
                 <Snackbar
                     autoHideDuration={6000}
                     open={alertOpen}
-                    onClose={`${handleAlertClose}5`}
+                    onClose={`${handleAlertClose}`}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                     message="The Username or Password is not exist"
                     key={'top' + 'center'}
@@ -65,36 +66,35 @@ const MealCardOwner = (props) => {
                 <CardMedia
                     component="img"
                     height="200"
-                    image={require(`../../../public/Images/${meal.pictures}`).default}
+                    image={`/Images/${meal.pictures}`}
                     alt={meal?.name}
                 />
                 <CardContent>
-                    <Typography variant="h4" component="div" className="card__title" sx={{ fontSize: '40px', fontWeight: '500' }}>
+                    <Typography variant="h4" className="card__title" sx={{ fontSize: '30px', fontWeight: '400',color : 'var(--primary)' }}>
                         {meal?.mealname}
                     </Typography>
-                    <Typography gutterBottom variant="p" className="card__rate">
+                    <Typography gutterBottom variant="p" className="card__rate" sx={{fontSize : '18px', color : '#555', display : 'flex', alignItems : 'center'}}>
                         Rate : <Rating name="read-only" value={meal?.rate} readOnly />
                     </Typography>
                     <Typography variant="h5" gutterBottom>
                         Ingredints :
-                        <ul className="ingredints">
+                        <ul className="ingredints" style={{display : 'flex', minHeight : '40px', paddingLeft : '25px', flexWrap : 'wrap', justifyContent : 'space-between' }}>
                             {
                                 (meal.Ingredients !== null) ?
                                     meal.Ingredients.split(',').map((item,index) => (
-                                        <li key={index}>{item}</li>
+                                        <li key={index} style={{width : '33%' , fontSize : '18px', color : '#888'}}>{item}</li>
                                     ))
                                     : ''
                             }
                         </ul>
                     </Typography>
-                    <div className="card__footer">
-                        <Typography variant="h5" className="price">
-                            Price : <span>{`${meal?.price}$`}</span>
+                    <Box className="card__footer" sx={{display : 'flex', justifyContent : 'center', alignItems : 'center'}}>
+                        <Typography variant="h5" className="price" sx={{fontSize : '20px', fontWeight : 600 , flex : '25%', color : '#555'}}>
+                            Price : <span style={{color: 'var(--primary)'}}>{`${meal?.price}$`}</span>
                         </Typography>
-                        <div className="card__inputs">
-                            <Button href={`editmeal/${meal?.id}`} variant="contained" className="btn" style={{ backgroundColor: 'var(--primary)', marginBottom: '10px' }}>Edit</Button>
+                        <Box className="card__inputs" sx={{flex : '25%'}}>
+                            <Button href={`editmeal/${meal?.id}`} variant="contained" style={{ backgroundColor: 'var(--primary)', marginBottom: '10px', marginLeft : '10px' }}>Edit</Button>
                             <Button variant="contained" onClick={handleClickOpen} sx={{ backgroundColor: '#ac0808', '&:hover': { backgroundColor: 'rgb(79 0 0)' }, mb: '10px', ml: '10px' }}>Delete</Button>
-
 
                             <Dialog
                                 open={open}
@@ -121,8 +121,8 @@ const MealCardOwner = (props) => {
                                 </DialogActions>
                             </Dialog>
 
-                        </div>
-                    </div>
+                        </Box>
+                    </Box>
                 </CardContent>
             </Card>
         </ThemeProvider>

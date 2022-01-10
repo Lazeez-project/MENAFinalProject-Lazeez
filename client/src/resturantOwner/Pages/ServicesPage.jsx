@@ -88,7 +88,6 @@ function ServicesPage() {
 
     return (
         <ThemeProvider theme={CustomTheme}>
-            <Box sx={{ minHeight: '100vh', padding: '50px' }} >
                 <Snackbar
                     autoHideDuration={6000}
                     open={open}
@@ -99,81 +98,89 @@ function ServicesPage() {
                 >
                     {alert}
                 </Snackbar>
-                <Box sx={{ display: 'flex', marginBottom: '50px' }}>
-                    <Box sx={{ marginRight: '20px' }}>
-                        <Checkbox id="0" checked={services[0].checked} onChange={handelService} />
-                    </Box>
-                    <Box>
-                        <Fab>
+            <Box sx={{ minHeight: '100vh', padding: {xs : '10px 10px', md : ' 10px 50px'}, display : 'flex', flexWrap : 'wrap', justifyContent : 'space-around' }} >
+                <Box sx={{ marginBottom: '40px', width : {xs : '100%', md : '47%'} , background : '#fff', p: 3, borderRadius : '10px', border : '2px solid var(--primary)', position : 'relative'}}>
+                <Checkbox id="0" checked={services[0].checked} size="large" sx={{position : 'absolute', top: '0', left : '0'}} onChange={handelService} />
+                    <Box sx={{textAlign : 'center'}}>
+                        <Fab sx={{mb : 2}}>
                             <FastfoodIcon fontSize="large" sx={{ color: "var(--primary)", '&:hover': { color: 'var(--secondary)' } }} />
                         </Fab>
-                        <Typography variant="h4" marginBottom="10px" component="div">Fast Food</Typography>
+                        
+                        <Typography variant="h4" marginBottom="10px" component="div"> Fast Food</Typography>
                         <Typography>
                             Provides the quickest service and food at the cheapest prices.
                         </Typography>
                     </Box>
                 </Box>
-                <Box sx={{ display: 'flex', marginBottom: '50px' }}>
-                    <Box sx={{ marginRight: '20px' }}>
-                        <Checkbox id="1" checked={services[1].checked} onChange={handelService} />
-                    </Box>
-                    <Box>
-                        <Fab sx={icon}>
+                <Box sx={{ marginBottom: '40px', width : {xs : '100%', md : '47%'} , background : '#fff', p: 3, borderRadius : '10px', border : '2px solid var(--primary)', position : 'relative'}}>
+                <Checkbox id="1" checked={services[1].checked} size="large" sx={{position : 'absolute', top: '0', left : '0'}} onChange={handelService} />
+                    <Box sx={{textAlign : 'center'}}>
+                        <Fab sx={{mb : 2}}>
                             <DeliveryDiningIcon fontSize="large" sx={{ color: "var(--primary)", '&:hover': { color: 'var(--secondary)' } }} />
                         </Fab>
+                        
                         <Typography variant="h4" marginBottom="10px" component="div">Fast Delivery</Typography>
-                        <Typography>The customer pays an extra shipping cost for this type of delivery.</Typography>
+                        <Typography>
+                            The customer pays an extra shipping cost for this type of delivery
+                        </Typography>
                     </Box>
                 </Box>
-                <Box sx={{ display: 'flex', marginBottom: '50px' }}>
-                    <Box sx={{ marginRight: '20px' }}>
-                        <Checkbox id="2" checked={services[2].checked} onChange={handelService} />
-                    </Box>
-                    <Box>
-                        <Fab sx={icon}>
+                <Box sx={{ marginBottom: '40px', width : {xs : '100%', md : '47%'} , background : '#fff', p: 3, borderRadius : '10px', border : '2px solid var(--primary)', position : 'relative'}}>
+                    <Checkbox id="2" checked={services[2].checked} size="large" sx={{position : 'absolute', top: '0', left : '0'}} onChange={handelService} />
+                    <Box sx={{textAlign : 'center'}}>
+                        <Fab sx={{mb : 2}}>
                             <CoffeeMakerIcon fontSize="large" sx={{ color: "var(--primary)", '&:hover': { color: 'var(--secondary)' } }} />
                         </Fab>
+                        
                         <Typography variant="h4" marginBottom="10px" component="div">Hot Drinks</Typography>
-                        <Typography>Serve hot drinks quickly and simply.</Typography>
+                        <Typography>
+                            Serve hot drinks quickly and simply
+                        </Typography>
                     </Box>
                 </Box>
-                <Box sx={{ display: 'flex', marginBottom: '50px' }}>
-                    <Box sx={{ marginRight: '20px' }}>
-                        <Checkbox id="3" checked={services[3].checked} onChange={handelService} />
-                    </Box>
-                    <Box>
-                        <Fab sx={icon}>
+                <Box sx={{ marginBottom: '40px', width : {xs : '100%', md : '47%'} , background : '#fff', p: 3, borderRadius : '10px', border : '2px solid var(--primary)', position : 'relative'}}>
+                    <Checkbox id="3" checked={services[3].checked}  size="large" sx={{position : 'absolute', top: '0', left : '0'}} onChange={handelService} />
+                    <Box sx={{textAlign : 'center'}}>
+                        <Fab sx={{mb : 2}}>
                             <BedroomBabyIcon fontSize="large" sx={{ color: "var(--primary)", '&:hover': { color: 'var(--secondary)' } }} />
                         </Fab>
-                        <Typography variant="h4" marginBottom="10px" component="div">Children's Playrooms</Typography>
-                        <Typography>Designed for the use by children aged from 4 to 9 whose heights are not exceeding 142cm.</Typography>
+                        
+                        <Typography variant="h4" marginBottom="10px" component="div">
+                            <Checkbox id="3" checked={services[3].checked}  size="large" sx={{position : 'absolute', top: '0', left : '0'}} onChange={handelService} /> Children's Playrooms</Typography>
+                        <Typography>
+                            Designed for the use by children aged from 4 to 9 whose heights are not exceeding 142cm
+                        </Typography>
                     </Box>
                 </Box>
-                <Box sx={{ display: 'flex', marginBottom: '50px' }}>
-                    <Box sx={{ marginRight: '20px' }}>
-                        <Checkbox id="4" checked={services[4].checked} onChange={handelService} />
-                    </Box>
-                    <Box>
-                        <Fab sx={icon}>
+                <Box sx={{ marginBottom: '40px', width : {xs : '100%', md : '47%'} , background : '#fff', p: 3, borderRadius : '10px', border : '2px solid var(--primary)', position : 'relative'}}>
+                    <Checkbox id="4" checked={services[4].checked} size="large" sx={{position : 'absolute', top: '0', left : '0'}} onChange={handelService} />
+                    <Box sx={{textAlign : 'center'}}>
+                        <Fab sx={{mb : 2}}>
                             <FavoriteBorderIcon fontSize="large" sx={{ color: "var(--primary)", '&:hover': { color: 'var(--secondary)' } }} />
                         </Fab>
+                        
                         <Typography variant="h4" marginBottom="10px" component="div">Healthy Food</Typography>
-                        <Typography>Delicious and fully premade healthy food  on a weekly or monthly basis.</Typography>
+                        <Typography>
+                            Delicious and fully premade healthy food  on a weekly or monthly basis
+                        </Typography>
                     </Box>
                 </Box>
-                <Box sx={{ display: 'flex', marginBottom: '50px' }}>
-                    <Box sx={{ marginRight: '20px' }}>
-                        <Checkbox id="5" checked={services[5].checked} onChange={handelService} />
-                    </Box>
-                    <Box>
-                        <Fab sx={icon}>
+                <Box sx={{ marginBottom: '40px', width : {xs : '100%', md : '47%'} , background : '#fff', p: 3, borderRadius : '10px', border : '2px solid var(--primary)', position : 'relative'}}>
+                    <Checkbox id="5" checked={services[5].checked}  size="large" sx={{position : 'absolute', top: '0', left : '0'}} onChange={handelService} />
+                    <Box sx={{textAlign : 'center'}}>
+                        <Fab sx={{mb : 2}}>
                             <CreditCardIcon fontSize="large" sx={{ color: "var(--primary)", '&:hover': { color: 'var(--secondary)' } }} />
                         </Fab>
+                        
                         <Typography variant="h4" marginBottom="10px" component="div">Credit/Debit Card Payment</Typography>
-                        <Typography>providing pay through credit/debit card.</Typography>
+                        <Typography>
+                            providing pay through credit/debit card
+                        </Typography>
                     </Box>
                 </Box>
-                <Button onClick={sendData} sx={{ color: 'white', backgroundColor: 'var(--primary)', '&:hover': { color: 'var(--ternary)', backgroundColor: 'var(--secondary)' } }}>Save</Button>
+            </Box>
+            <Box sx={{padding: {xs : '0 10px', md : '0 50px'}, textAlign : 'right', marginBottom : '20px'}}>
+                <Button onClick={sendData} sx={{ color: 'white', backgroundColor: 'var(--primary)', '&:hover': { color: 'var(--ternary)', backgroundColor: 'var(--secondary)' }}}>Save</Button>
             </Box>
         </ThemeProvider>
     );

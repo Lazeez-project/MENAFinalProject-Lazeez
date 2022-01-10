@@ -28,7 +28,7 @@ const MyMeals = () => {
 
     return (
         <ThemeProvider theme={CustomTheme}>
-            <Box sx={{ maxWidth: '100%', minHeight: '100vh', padding: { xs: '10px', lg: '50px' } }}>
+            <Box sx={{ width: '100%', minHeight: '100vh', padding: { xs: '10px', lg: '50px' } }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: "15px 0" }}>
                     <Typography
                         variant="h3"

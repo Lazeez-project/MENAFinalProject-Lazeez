@@ -3,7 +3,7 @@ import { Box } from "@mui/system"
 
 const Layout = (props) => {
     return (
-        <Box>
+        <Box sx={{width : '100%'}}>
            <Path id={props.id} />
         </Box>
     )

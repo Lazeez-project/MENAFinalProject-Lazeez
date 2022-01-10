@@ -8,7 +8,7 @@ const OwnerHome = () => {
     const {id} = useParams();
 
     return (
-        <Box sx={{minWidth : '100%',maxWidth: '100%' ,display: 'flex'}}>
+        <Box sx={{minWidth : '100%',maxWidth: '100%' ,display: 'flex', backgroundColor : '#efefef'}}>
             <Sidebar id={id} />
             <Layout id={id} />
         </Box>

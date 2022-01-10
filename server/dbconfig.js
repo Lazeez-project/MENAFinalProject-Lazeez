@@ -1,8 +1,8 @@
 const config = {
-    user: 'sa',
+    user: 'sa', 
     password: '12345678',
     server: "localhost",
-    database: 'Lazeez',
+    database: 'Lazeez3',
     trustServerCertificate: true,
 };
 

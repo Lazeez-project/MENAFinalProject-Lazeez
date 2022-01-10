@@ -100,7 +100,7 @@ const EditMeal = () => {
                             <Input inputValue={makeMeal} value={meal.price} name="price" title="Meal's Price" plaseholder="The Meal price" type="number" />
                             <Input inputValue={makeMealImage} name="newpictures" title="Meal's Picture" type="file" />
                             <Input inputValue={makeMeal} value={meal.Ingredients} name="Ingredients" title="Meal's Ingredints" plaseholder="The Meal Ingredints" type="text" />
-                            <Button variant="contained" color="success" onClick={sendData} sx={{ width: "200px", height: '50px', backgroundColor: 'var(--main-color)' }}>Edit</Button>
+                            <Button variant="contained" color="success" onClick={sendData} sx={{ width: "200px", height: '50px', backgroundColor: 'var(--primary)' }}>Edit</Button>
                         </>
                 }
             </Box>
