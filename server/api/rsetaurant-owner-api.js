@@ -55,6 +55,7 @@ router.route('/restaurantowner/restaurants').post((req, res) => {
         }
         dboperations.register(req.body).then(resulte => {
             dboperations.getResId(req.body).then(result => {
+                console.log(result);
                 dboperations.addUserOwner(result[0][0].id, req.body).then(reslt => {
                     res.json(reslt[0])
                 })
@@ -126,16 +127,20 @@ router.route('/restaurantowner/restaurant/:id').delete((req, res) => {          
         pictures = result[0][0].pictures;
         if (pictures !== null) {
             arr = pictures.split(',')
-            arr.map(item => { if (item !== '') { fs.unlink(`../client/public/Images/${item}`, (err) => {
-                if(err){
-                    res.status(500)
+            arr.map(item => {
+                if (item !== '') {
+                    fs.unlink(`../client/public/Images/${item}`, (err) => {
+                        if (err) {
+                            res.status(500)
+                        }
+                    })
                 }
-            })} })
+            })
         }
         dboperations.deleteRestaurant(id).then(result => {
             res.json(result[0])
         })
-        .catch(err => res.json(500))
+            .catch(err => res.json(500))
     })
 });
 
@@ -227,8 +232,10 @@ router.route('/restaurantowner/restaurant/:id/services').get((req, res) => {
     })
 });
 router.route('/restaurantowner/restaurant/:id/services').post((req, res) => {
-    const { id } = req.params
+    const { id } = req.params;
+    console.log(req.body, 'This is body *************************');
     dboperations.getServices(id).then(resulte => {
+        console.log(resulte)
         if (resulte[0].length == 0) {
             dboperations.setServices(req.body).then(result => {
                 res.json(result[0])

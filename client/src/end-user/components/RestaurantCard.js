@@ -33,7 +33,7 @@ const RestaurantCard = (props) => {
             />
             {/*<img src={'/Images/restaurant3.png'} alt='test' style={{ height: '2000px' }} />*/}
             <Box sx={{ color: 'black', backgroundColor: 'var(--ternary)', }}>
-                <CardContent >
+                <CardContent sx={{ height: '144.45px' }}>
                     <Typography gutterBottom variant="h5" component="div">
                         {name}
                     </Typography>

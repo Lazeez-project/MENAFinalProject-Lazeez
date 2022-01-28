@@ -4,8 +4,8 @@ const sql = require('mssql');
 async function register(body) {
     let pool = await sql.connect(config)
     let restaurant = await pool.request()
-        .input('name', sql.VarChar, body.name)
-        .input('location', sql.VarChar, body.location)
+        .input('name', sql.NVarChar, body.name)
+        .input('location', sql.NVarChar, body.location)
         .input('pictures', sql.VarChar, body.pictures)
         .input('saterday', sql.Int, body.saterday)
         .input('sunday', sql.Int, body.sunday)
@@ -31,8 +31,8 @@ async function updateRestaurantData(id, body) {
     let pool = await sql.connect(config)
     let restaurant = await pool.request()
         .input('id', sql.Int, id)
-        .input('name', sql.VarChar, body.name)
-        .input('location', sql.VarChar, body.location)
+        .input('name', sql.NVarChar, body.name)
+        .input('location', sql.NVarChar, body.location)
         .input('saterday', sql.Int, body.saterday)
         .input('sunday', sql.Int, body.sunday)
         .input('monday', sql.Int, body.monday)
@@ -53,7 +53,7 @@ async function updateRestaurantData(id, body) {
 async function getResId(body) {
     let pool = await sql.connect(config)
     let id = await pool.request()
-        .input('name', sql.VarChar, body.name)
+        .input('name', sql.NVarChar, body.name)
         .input('email', sql.VarChar, body.email)
         .query('SELECT id FROM restaurant WHERE name = @name AND email = @email')
     return id.recordsets
@@ -143,7 +143,7 @@ async function addMeal(body, picName) {
 
     let pool = await sql.connect(config)
     let meal = await pool.request()
-        .input('mealname', sql.VarChar, body.mealname)
+        .input('mealname', sql.NVarChar, body.mealname)
         .input('price', sql.Int, body.price)
         .input('pictures', sql.VarChar, picName)
         .input('ingredints', sql.VarChar, body.Ingredints)
@@ -264,6 +264,7 @@ async function getServices(id) {
 }
 
 async function setServices(serv) {
+    console.log(serv, "This is for test **************************");
     let pool = await sql.connect(config)
     let service = await pool.request()
         .input('id1', sql.Int, serv[0].id)
@@ -284,7 +285,7 @@ async function setServices(serv) {
         .input('id6', sql.Int, serv[5].id)
         .input('resid6', sql.Int, serv[5].resid)
         .input('checked6', sql.Int, serv[5].checked)
-        .query('INSERT INTO services VALUES (@id1,@resid1,@checked1), (@id2,@resid2,@checked2), (@id3,@resid3,@checked3), (@id4,@resid4,@checked4), (@id5,@resid5,@checked5), (@id6,@resid6,@checked6)')
+        .query('INSERT INTO services  VALUES (@id1,@resid1,@checked1), (@id2,@resid2,@checked2), (@id3,@resid3,@checked3), (@id4,@resid4,@checked4), (@id5,@resid5,@checked5), (@id6,@resid6,@checked6)')
 
     return service.recordsets
 }
@@ -325,12 +326,12 @@ async function getRestaurants() {
 
 
 
-async function deleteRestaurant(id){
+async function deleteRestaurant(id) {
 
     let pool = await sql.connect(config)
     let restaurant = await pool.request()
-                            .input('id', sql.Int , id)
-                            .query('DELETE FROM orderlist WHERE resid = @id;DELETE FROM orderusers WHERE resid = @id;DELETE FROM meals WHERE resid = @id;DELETE FROM users WHERE resid = @id;DELETE FROM services WHERE resid = @id;DELETE FROM restaurant WHERE id = @id;')
+        .input('id', sql.Int, id)
+        .query('DELETE FROM orderlist WHERE resid = @id;DELETE FROM orderusers WHERE resid = @id;DELETE FROM meals WHERE resid = @id;DELETE FROM users WHERE resid = @id;DELETE FROM services WHERE resid = @id;DELETE FROM restaurant WHERE id = @id;')
     return restaurant.recordsets;
 
 }

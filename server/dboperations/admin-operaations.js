@@ -147,14 +147,23 @@ async function activeMessages(id, isread) {
 }
 
 
-async function deleteRestaurant(id){
+async function deleteRestaurant(id) {
 
     let pool = await sql.connect(config)
     let restaurant = await pool.request()
-                            .input('id', sql.Int , id)
-                            .query('DELETE FROM orderlist WHERE resid = @id;DELETE FROM orderusers WHERE resid = @id;DELETE FROM meals WHERE resid = @id;DELETE FROM users WHERE resid = @id;DELETE FROM services WHERE resid = @id;DELETE FROM restaurant WHERE id = @id;')
+        .input('id', sql.Int, id)
+        .query('DELETE FROM orderlist WHERE resid = @id;DELETE FROM orderusers WHERE resid = @id;DELETE FROM meals WHERE resid = @id;DELETE FROM users WHERE resid = @id;DELETE FROM services WHERE resid = @id;DELETE FROM restaurant WHERE id = @id;')
     return restaurant.recordsets;
 
+}
+
+async function getRestaurant(id) {
+    let pool = await sql.connect(config)
+    let restaurant = await pool.request()
+        .input('id', sql.Int, id)
+        .query('SELECT * FROM restaurant WHERE id = @id')
+
+    return restaurant.recordsets
 }
 
 
@@ -174,4 +183,5 @@ module.exports = {
     activeMessages: activeMessages,
     getRestaurantsNum: getRestaurantsNum,
     deleteRestaurant: deleteRestaurant,
+    getRestaurant: getRestaurant,
 }

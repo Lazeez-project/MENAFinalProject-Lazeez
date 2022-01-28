@@ -29,7 +29,7 @@ const About = () => {
                     <Typography variant='h5' sx={{fontSize : '25px' ,color : 'var(--primary)'}}>Team Leader</Typography>
                         <ListItem alignItems="flex-start">
                                 <ListItemAvatar>
-                                    <Avatar alt="Murawweh Daher" sx={{backgroundColor : '#7400b8'}} src="/Image/mohamed.jpg" />
+                                    <Avatar alt="Murawweh Daher" sx={{backgroundColor : '#7400b8'}} src="/Image/murawweh.jpg" />
                                 </ListItemAvatar>
                                 <ListItemText
                                     primary="Murawweh Daher"
@@ -51,7 +51,7 @@ const About = () => {
                     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                         <ListItem alignItems="flex-start">
                             <ListItemAvatar>
-                                <Avatar alt="Mohamed Ubeid" sx={{backgroundColor : '#4ea8de'}} src="/Image/mohamed.jpg" />
+                                <Avatar alt="Mohamed Ubeid" sx={{backgroundColor : '#4ea8de'}} src="/Image/me.jpg" />
                             </ListItemAvatar>
                             <ListItemText
                                 primary="Mohamed Ubeid"

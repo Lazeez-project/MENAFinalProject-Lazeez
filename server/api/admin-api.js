@@ -118,9 +118,7 @@ router.route("/admin/messages/:id").put((req, res) => {
 
 router.route("/admin/messages/:id").delete((req, res) => {
     const { id } = req.params;
-    dboperations.deleteMessages(id).then((resulte) => {
-        res.json(resulte[0]);
-    });
+    dboperations.deleteMessages(id);
 });
 
 
@@ -145,10 +143,32 @@ router.route('/restaurantowner/restaurant/:id').delete((req, res) => {          
         dboperations.deleteRestaurant(id).then(result => {
             res.json(result[0])
         })
-        .catch(err => res.json(500))
+            .catch(err => res.json(500))
     })
 });
 
+router.route('/admin/pending/:id').delete((req, res) => {
+    const { id } = req.params
+    let pictures = '';
+    dboperations.getRestaurant(id).then(result => {
+        pictures = result[0][0].pictures;
+        console.log(pictures);
+        if (pictures !== null) {
+            arr = pictures.split(',')
+            arr.map(item => { if (item !== '') { fs.unlinkSync(`../client/public/images/${item}`) } })
+        }
+        dboperations.deleteRestaurant(id).then(resulte => {
+            dboperations.deleteRestaServices(id).then(reslt => {
+                dboperations.deleteRes(id).then((resulte) => {
+                    res.json(resulte[0]);
+                })
+                    .catch(err => res.status(5000))
+            })
+                .catch(err => res.status(5000))
+        })
+            .catch(err => res.status(5000))
+    })
+});
 
 router.route('/admin/restaurants/numbers').get((req, res) => {
     let result = []
