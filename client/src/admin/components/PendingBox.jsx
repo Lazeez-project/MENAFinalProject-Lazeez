@@ -28,7 +28,7 @@ const PendingBox = (props) => {
                 Email : <Typography variant="body1" component="span">{data.email}</Typography>
             </Typography>
             <Typography variant="h6" component="div">
-                Phone Number : <Typography variant="body1" component="span">{data.phoneNumber}</Typography>
+                Phone Number : <Typography variant="body1" component="span">{data.phonenumber}</Typography>
             </Typography>
 
             <Button
